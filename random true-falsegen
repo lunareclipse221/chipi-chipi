@@ -1,0 +1,59 @@
+-- Improved random seed function using time and clock
+function improvedRandomSeed()
+    math.randomseed(os.time() + math.floor(os.clock() * 100000))
+end
+
+-- Function to generate random true or false
+function fiftyFifty()
+    return math.random(0, 1) == 1  -- 50/50 chance of returning true or false
+end
+
+-- Function to generate a random number between 1 and 5
+function randomPick()
+    return math.random(1, 5)
+end
+
+-- Main program
+function main()
+    -- Seed the random generator with improved randomness
+    improvedRandomSeed()
+
+    -- Define your 5 numbers
+    local number1 = 1
+    local number2 = 2
+    local number3 = 3
+    local number4 = 4
+    local number5 = 5
+
+    -- Store the numbers in a table for easier processing
+    local numbers = {number1, number2, number3, number4, number5}
+    local results = {}
+
+    -- Generate a random true/false value for each number
+    for i, num in ipairs(numbers) do
+        results[num] = fiftyFifty()  -- Store true/false result for each number
+    end
+
+    -- Randomly pick a number between 1 and 5
+    local pickedNumber = randomPick()
+    print("Randomly picked number: " .. pickedNumber)
+
+    -- Check if the picked number's true/false value and perform actions
+    if results[pickedNumber] then
+        -- If the result is true, perform some action
+        print("Number " .. pickedNumber .. " is TRUE! Performing action for true...")
+        -- You can add any specific action here
+    else
+        -- If the result is false, perform a different action
+        print("Number " .. pickedNumber .. " is FALSE! Performing action for false...")
+        -- You can add a different action here
+    end
+
+    -- Display the true/false status of all numbers for clarity
+    for num, outcome in pairs(results) do
+        print("Number: " .. num .. " | Result: " .. tostring(outcome))
+    end
+end
+
+-- Run the program
+main()
